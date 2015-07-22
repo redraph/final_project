@@ -64,9 +64,12 @@
 
 				<!--This form should have date, title, and content fields. -->
 				<h2> Journify Your Life Raphael</h2>
+				
+  				<button id="clickme">Journify!</button>
+				
 				<form class="register" id="journal-form">
 					
-					<input id="date" type="date" name="date" value="date" style="width: 350px; padding: 2 0 2; margin: 10 0 10px; color: #fff; background-color: transparent; box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
+					<input id="date" type="date" name="date" style="width: 350px; padding: 2 0 2; margin: 10 0 10px; color: #fff; background-color: transparent; box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
 				
 					
 					<input id="title" style="width: 350px; color: #fff;  padding: 10 0 10; margin: 10 0 10px; background-color: transparent; box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);" type="text" name="title" value="Title">
@@ -80,9 +83,9 @@
 				
 
 			</div>
-			<div class="col-md-12 col-xs-12">
+			<div class="col-md-12 col-xs-12 entries">
 			<h3>See Previous Entries</h3>
-			<button value="Previous" class="button centre" href="">Previous</button> <button value="Next" class="button centre" href="">Next</button>
+			<button id="prev_button" value="Previous" class="button centre" href="">Previous</button> <button value="Next" id="next_button" class="button centre" href="">Next</button>
 			</div>
 		</div>
 	</div>

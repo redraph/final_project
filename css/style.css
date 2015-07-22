@@ -12,6 +12,11 @@
     left:37%;
   } 
 
+  .entries{
+    padding: 100 0 100px;
+    background-color: #937e60;
+  }
+
   .test-font {
   	font-size: 50px;
   	font-family: Arial;
@@ -25,6 +30,7 @@
    left:38%;
    width:350px;
    background-color: transparent !important;
+   /**  cannot get the JS to work so this commented out now: --- display: none; ---*/
    
 }
 

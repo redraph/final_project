@@ -18,7 +18,7 @@
 /**  END OVERRIDES **/
 
  .top-image {
-    background: url(https://download.unsplash.com/photo-1425141750113-187b6a13e28c) no-repeat center center; 
+    background: url("file:///Users/user/Sites/brainstation/final_project/img/photo-1425141750113-187b6a13e28c.jpeg") no-repeat center center; 
     -webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
@@ -55,6 +55,7 @@
 div.
 .services{
 padding-bottom:2em;
+
 }
 
 h2,
@@ -69,7 +70,8 @@ h3 {
 	  text-align: center;
 	  font-size: 2em;
 	  font-family: 'Sigmar One', cursive;
-	  color: #000;
+	  color: #fff;
+	  padding: 0 0 40px;
 }
 
 em,
