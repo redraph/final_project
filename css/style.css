@@ -30,6 +30,7 @@
    left:38%;
    width:350px;
    background-color: transparent !important;
+   display:none;
    /**  cannot get the JS to work so this commented out now: --- display: none; ---*/
    
 }
@@ -108,4 +109,10 @@ input:focus, select:focus{
 }
 
 
+.entry{
+  text-align:center;
+}
+.entry .title{
+  font-size:24px;
+}
 

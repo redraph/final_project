@@ -17,20 +17,31 @@ Each journal should have an edit button so that clicking the button allows you t
 */
 
 //form fade in (not working?)
+var _journal = new Journal();
+
+
 $( document ).ready( function () {
 	$( "#clickme" ).click( function() {
-		$( "#form.register" ).fadeIn( "slow", function() {
+		$('#entry').hide();
+		$( "#journal-form" ).fadeIn( "slow", function() {
    		// Animation complete
   		});
+	});
+
+	//trying to capture the values of the form and connect it with the stand-alone journal example we had in class
+	$( "#journal-form" ).submit(function( event ) {
+	  event.preventDefault();
+	  var frm = $(this);
+	  var date = frm.find('input[name="date"]').val();
+	  var title = frm.find('input[name="title"]').val();
+	  var content = frm.find('textarea[name="content"]').val();
+
+	  var entry = new Entry(date, title, content);
+	  _journal.addEntry(entry);
 	});
 });
 
 
-//trying to capture the values of the form and connect it with the stand-alone journal example we had in class
-$( "#journal-form" ).submit(function( event ) {
-  console.log( $( this ).serializeArray() );
-  event.preventDefault();
-});
 
 //event listener for previous & next button
 
@@ -49,45 +60,47 @@ $('next_button').click(function( event ){
 function Journal() {
 
 	this.entries = [];
+	this.entryPage = $('#entry');
 
 	// adds an Entry with the given info
-	this.addEntry = function addIt(date, title, content) {
-
-		// create the Entry object
-		var entry = new Entry(date, title, content);
+	this.addEntry = function(entry) {
+		var _this = this;
 		// add it to the array
 		this.entries.push(entry);
+		var index = this.entries.length - 1;
+		$('#table-of-contents').append('<li data-index="'+index+'">'+entry.title+'</li>');
+		
+		$('#table-of-contents li').unbind('click');
+		$('#table-of-contents li').click(function(){
+			var index = $(this).attr('data-index');
+			_this.displayEntries(index);
+	    });
+
+	    this.saveJournal();
+
+	    //$('#table-of-contents li').click(function(){_journal.displayEntries()})
 	}
-
-	// Displays an Entry object
-	this.displayEntry = function showEntry(entry) {
-		console.log("------------------------------");
-		console.log("\t" + entry.title + "\n");
-		console.log("\t" + "By: " + entry.author);
-		console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		console.log(entry.content);	
-	}
-	//not sure what is happenieng above here? - need to update to the latest array parameters (date, title, content)
-
-
 
 	// Displays an array of Entry objects
-	this.displayEntries = function showEntries(entryArray) {
-		for (var i = 0; i < entryArray.length; i++) {	
-			this.displayEntry(entryArray[i]); // display the entry
-			console.log(); // adds a new line
-		}
+	this.displayEntries = function(index) {
+		$('#journal-form').hide();
+		$('#entry').fadeIn('slow');
+		var entry = this.entries[index];
+
+		this.entryPage.find('[name="title"]').html(entry.title);
+		this.entryPage.find('[name="content"]').html(entry.content);
+		this.entryPage.find('[name="date"]').html(entry.date);
 	}
 
 	// show next entry in the array
-		this.nextEntry = function nextItem() {
+		this.nextEntry = function() {
 	    i = i + 1; // increase i by one
 	    i = i % entries.length; 
 	    return entries[i]; 
 	}
 
 	// show previous entry in the array
-	this.previousEntry = function prevItem() {
+	this.previousEntry = function() {
 	    if (i === 0) { // i would become 0
 	        i = entries.length; // so put it at the other end of the array
 	    }
@@ -95,17 +108,41 @@ function Journal() {
 	    return entries[i]; // give us back the item of where we are now
 	}
 
-
-	
-
-
 	// Displays all entries in the Journal
-	this.displayAllEntries = function showAllEntries() {
-		this.displayEntries(this.entries);
+	this.displayAllEntries = function() {
+		console.log(this.entries);
 	}
 
+	this.saveJournal = function(){
+		var _this = this;
+		localStorage.setItem('myEntries',JSON.stringify(_this.entries));
+	}
+
+	this.initJournal = function(){
+		var _this = this;
+		if(localStorage.getItem('myEntries') != '' && localStorage.getItem('myEntries') != null){
+			this.entries = $.parseJSON(localStorage.getItem('myEntries'));
+			for(index in this.entries){
+				$('#table-of-contents').append('<li data-index="'+index+'">'+this.entries[index].title+'</li>');
+			}
+
+
+			$('#table-of-contents li').click(function(){
+				var index = $(this).attr('data-index');
+				_this.displayEntries(index);
+	    	});	
+		}
+		else{
+			this.entries = [];
+		}
+	}
+
+	this.initJournal();
 
 }
+
+
+
 
 function Entry(date, title, content) {
 	this.date = date;

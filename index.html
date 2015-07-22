@@ -8,7 +8,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="js/final-journal.js"></script>
+	
 	
 
 	<title></title>
@@ -64,9 +64,25 @@
 
 				<!--This form should have date, title, and content fields. -->
 				<h2> Journify Your Life Raphael</h2>
+				<ul id="table-of-contents">
+				</ul>
 				
   				<button id="clickme">Journify!</button>
 				
+				<section id="entry" class="entry">
+
+					<div class="title" name="title">
+						TEST Title
+					</div>
+
+					<p name="content">
+						Test Content
+					</p>
+
+					<p>
+						Posted: <span name="date">2015-10-06</span>
+					</p>
+				</section>
 				<form class="register" id="journal-form">
 					
 					<input id="date" type="date" name="date" style="width: 350px; padding: 2 0 2; margin: 10 0 10px; color: #fff; background-color: transparent; box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);">
@@ -98,7 +114,7 @@
     <!-- Below Image -->
     
 	
-
+    <script src="js/final-journal.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	
 
